@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.purush.imgursearch.data.repositories.CommentRepository
 import com.purush.imgursearch.data.repositories.ImageRepository
+import com.purush.imgursearch.ui.details.ImageDetailsViewModel
 
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory(
@@ -19,7 +20,9 @@ class ViewModelFactory(
                 isAssignableFrom(ImageSearchViewModel::class.java) -> {
                     ImageSearchViewModel(imagesRepository)
                 }
-                //TODO add future view model initializations here
+                isAssignableFrom(ImageDetailsViewModel::class.java) -> {
+                    ImageDetailsViewModel(commentRepository)
+                }
                 else -> {
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }

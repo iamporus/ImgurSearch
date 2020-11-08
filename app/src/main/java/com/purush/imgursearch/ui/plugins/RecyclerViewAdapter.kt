@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,27 +14,36 @@ import com.bumptech.glide.request.RequestOptions
 import com.purush.imgursearch.R
 import com.purush.imgursearch.data.schema.Image
 
-class RecyclerViewAdapter :
+class RecyclerViewAdapter(
+    private val listener: RecyclerViewPlugin.ImageClickedListener
+) :
     ListAdapter<Image, RecyclerViewAdapter.BaseViewHolder>(ImageDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return BaseViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.grid_list_item_layout, parent, false
-            )
+            ), listener
         )
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item, position)
     }
 
-    class BaseViewHolder(private val rowItemView: View) :
+    class BaseViewHolder(
+        private val rowItemView: View,
+        private val listener: RecyclerViewPlugin.ImageClickedListener
+    ) :
         RecyclerView.ViewHolder(rowItemView) {
 
-        fun bind(item: Image) {
+        fun bind(item: Image, position: Int) {
 
+            val view: ImageView = rowItemView.findViewById(R.id.imageView)
+            view.setOnClickListener {
+                listener.onImageClicked(item, position)
+            }
             Glide.with(rowItemView.context).load(item.link)
                 .centerCrop()
                 .apply(
@@ -42,7 +52,7 @@ class RecyclerViewAdapter :
                 )
                 .placeholder(ColorDrawable(Color.GRAY))
                 .error(ColorDrawable(Color.RED))
-                .into(rowItemView.findViewById(R.id.imageView))
+                .into(view)
         }
 
     }

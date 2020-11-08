@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.purush.imgursearch.R
+import com.purush.imgursearch.data.schema.Image
+import com.purush.imgursearch.ui.details.ImageDetailsActivity
 import com.purush.imgursearch.ui.plugins.DebounceTextWatcher
 import com.purush.imgursearch.ui.plugins.DebounceTextWatcher.DebounceCompletedListener
 import com.purush.imgursearch.ui.plugins.RecyclerViewPlugin
@@ -20,7 +22,7 @@ import kotlin.coroutines.CoroutineContext
 @Suppress("unused")
 private const val TAG = "ImageSearchFragment"
 
-class ImageSearchFragment : Fragment(), CoroutineScope {
+class ImageSearchFragment : Fragment(), CoroutineScope, RecyclerViewPlugin.ImageClickedListener {
 
     override val coroutineContext: CoroutineContext = Dispatchers.Main
 
@@ -88,7 +90,12 @@ class ImageSearchFragment : Fragment(), CoroutineScope {
 
     private fun setupRecyclerView(view: View) {
 
-        recyclerViewPlugin = RecyclerViewPlugin(view)
+        recyclerViewPlugin = RecyclerViewPlugin(view, this)
+    }
+
+    override fun onImageClicked(image: Image, position: Int) {
+
+        ImageDetailsActivity.navigate(activity, image)
     }
 
 }
