@@ -1,5 +1,10 @@
 package com.purush.imgursearch.data
 
+import com.purush.imgursearch.data.schema.ImgurResponseSchema
+import retrofit2.Response
+import retrofit2.http.GET
+import retrofit2.http.Query
+
 /**
  * Describes endpoints to fetch the images from Imgur
  *
@@ -7,7 +12,7 @@ package com.purush.imgursearch.data
  */
 interface ImgurApi {
 
-    //TODO convert to retrofit call
-    suspend fun getImagesByQuery(searchQuery: String)
+    @GET("/3/gallery/search")
+    suspend fun getImagesByQuery(@Query("q") searchQuery: String): Response<ImgurResponseSchema>
 
 }
