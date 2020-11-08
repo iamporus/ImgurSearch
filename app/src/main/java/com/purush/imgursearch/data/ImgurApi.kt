@@ -12,7 +12,7 @@ import retrofit2.http.Query
  */
 interface ImgurApi {
 
-    @GET("/3/gallery/search")
+    @GET("/3/gallery/search/1")
     suspend fun getImagesByQuery(@Query("q") searchQuery: String): Response<ImgurResponseSchema>
 
 }

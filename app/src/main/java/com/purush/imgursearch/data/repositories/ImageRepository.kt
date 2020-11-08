@@ -34,8 +34,10 @@ class DefaultImageRepository(
                 val images = mutableListOf<Image>()
                 response.body()?.let {
                     it.imageData.map { data ->
+                        val title = data.title
                         if (data.imagesCount != 0) {
                             data.images.map { image ->
+                                image.title = title
                                 images.add(image)
                             }
                         }
