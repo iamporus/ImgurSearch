@@ -1,4 +1,4 @@
-package com.purush.imguresearch
+package com.purush.imgursearch
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

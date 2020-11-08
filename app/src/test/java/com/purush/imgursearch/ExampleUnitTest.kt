@@ -1,4 +1,4 @@
-package com.purush.imguresearch
+package com.purush.imgursearch
 
 import org.junit.Test
 
