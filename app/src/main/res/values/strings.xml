@@ -2,4 +2,5 @@
     <string name="app_name">Imgur Search</string>
     <string name="empty_string" />
     <string name="load_error_status">Oops. :( \n Failed to load the images!</string>
+    <string name="generic_toast_error_fetch_error">Error while fetching images. Try again later</string>
 </resources>

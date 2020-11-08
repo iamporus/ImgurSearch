@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageView android:id="@+id/imageView"
+    android:layout_margin="@dimen/generic_grid_item_padding"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:contentDescription="@string/empty_string"
+    android:scaleType="centerCrop"
+    android:src="@color/black"
+    android:layout_width="@dimen/generic_grid_image_size"
+    android:layout_height="@dimen/generic_grid_image_size" />
