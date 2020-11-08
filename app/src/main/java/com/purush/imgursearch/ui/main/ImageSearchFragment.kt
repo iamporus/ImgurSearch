@@ -1,7 +1,6 @@
 package com.purush.imgursearch.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +17,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
+@Suppress("unused")
 private const val TAG = "ImageSearchFragment"
 
 class ImageSearchFragment : Fragment(), CoroutineScope {
@@ -48,18 +48,20 @@ class ImageSearchFragment : Fragment(), CoroutineScope {
 
         // observe changes in list of images cached by view model's live data and redraw list accordingly
         viewModel.imageList.observe(viewLifecycleOwner, {
-
-            Log.d(TAG, "received response: $it")
-
             recyclerViewPlugin.submitList(it)
+        })
 
-            progressBar.visibility = View.GONE
-            errorTextView.visibility = View.GONE
+        // observe changes to success flag while fetching images and reflect in UI accordingly
+        viewModel.loadSuccessEvent.observe(viewLifecycleOwner, {
+            it.getContentIfNotHandled().let {
+                progressBar.visibility = View.GONE
+                errorTextView.visibility = View.GONE
+            }
         })
 
         // observe changes error flag while fetching images and reflect in UI accordingly
         viewModel.loadFailureEvent.observe(viewLifecycleOwner, {
-            if (it) {
+            it.getContentIfNotHandled().let {
                 Toast.makeText(
                     context,
                     getString(R.string.generic_toast_error_fetch_error),
