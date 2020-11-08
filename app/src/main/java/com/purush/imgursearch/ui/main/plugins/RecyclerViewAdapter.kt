@@ -1,11 +1,15 @@
 package com.purush.imgursearch.ui.main.plugins
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.purush.imgursearch.R
 import com.purush.imgursearch.data.schema.Image
 
@@ -28,10 +32,17 @@ class RecyclerViewAdapter :
     class BaseViewHolder(private val rowItemView: View) :
         RecyclerView.ViewHolder(rowItemView) {
 
-        @Suppress("UNUSED_PARAMETER")
         fun bind(item: Image) {
 
-            //TODO: Glide glory awaits here...
+            Glide.with(rowItemView.context).load(item.link)
+                .centerCrop()
+                .apply(
+                    RequestOptions()
+                        .override(100, 100)
+                )
+                .placeholder(ColorDrawable(Color.GRAY))
+                .error(ColorDrawable(Color.RED))
+                .into(rowItemView.findViewById(R.id.imageView))
         }
 
     }
