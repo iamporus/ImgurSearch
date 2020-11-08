@@ -1,4 +1,4 @@
-package com.purush.imgursearch.ui.main.plugins
+package com.purush.imgursearch.ui.plugins
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable

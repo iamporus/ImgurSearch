@@ -9,9 +9,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.purush.imgursearch.R
-import com.purush.imgursearch.ui.main.plugins.DebounceTextWatcher
-import com.purush.imgursearch.ui.main.plugins.DebounceTextWatcher.DebounceCompletedListener
-import com.purush.imgursearch.ui.main.plugins.RecyclerViewPlugin
+import com.purush.imgursearch.ui.plugins.DebounceTextWatcher
+import com.purush.imgursearch.ui.plugins.DebounceTextWatcher.DebounceCompletedListener
+import com.purush.imgursearch.ui.plugins.RecyclerViewPlugin
 import com.purush.imgursearch.utils.getViewModelFactory
 import kotlinx.android.synthetic.main.image_search_fragment.*
 import kotlinx.coroutines.CoroutineScope

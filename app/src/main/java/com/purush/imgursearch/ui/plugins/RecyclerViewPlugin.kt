@@ -1,4 +1,4 @@
-package com.purush.imgursearch.ui.main.plugins
+package com.purush.imgursearch.ui.plugins
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
