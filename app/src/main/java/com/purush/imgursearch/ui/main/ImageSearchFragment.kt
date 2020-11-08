@@ -6,17 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.purush.imgursearch.R
+import com.purush.imgursearch.ui.main.plugins.DebounceTextWatcher
+import com.purush.imgursearch.ui.main.plugins.DebounceTextWatcher.DebounceCompletedListener
 import com.purush.imgursearch.ui.main.plugins.RecyclerViewPlugin
 import com.purush.imgursearch.utils.getViewModelFactory
 import kotlinx.android.synthetic.main.image_search_fragment.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlin.coroutines.CoroutineContext
 
 private const val TAG = "ImageSearchFragment"
 
-class ImageSearchFragment : Fragment() {
+class ImageSearchFragment : Fragment(), CoroutineScope {
+
+    override val coroutineContext: CoroutineContext = Dispatchers.Main
 
     // lazy initialization of view model through use of delegates and view model factory
     private val viewModel: ImageSearchViewModel by viewModels {
@@ -67,14 +73,15 @@ class ImageSearchFragment : Fragment() {
 
     private fun setupSearchField() {
 
-        // TODO: add 250ms debounce as per requirement
-        searchBox.addTextChangedListener {
-            it?.let {
-                if (it.length > 2) {
-                    viewModel.onQueryTextChanged(it.toString())
+        val debounceTextWatcher =
+            DebounceTextWatcher(this, object : DebounceCompletedListener {
+                override fun onDebounceCompleted(query: String) {
+                    viewModel.onQueryTextChanged(query)
+                    progressBar.visibility = View.VISIBLE
+                    errorTextView.visibility = View.GONE
                 }
-            }
-        }
+            })
+        searchBox.addTextChangedListener(debounceTextWatcher.debounceTextWatcher)
     }
 
     private fun setupRecyclerView(view: View) {
