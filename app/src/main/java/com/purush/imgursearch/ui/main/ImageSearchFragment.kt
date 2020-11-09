@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.purush.imgursearch.R
-import com.purush.imgursearch.data.schema.Image
+import com.purush.imgursearch.data.source.remote.schema.Image
 import com.purush.imgursearch.ui.details.ImageDetailsActivity
 import com.purush.imgursearch.ui.plugins.DebounceTextWatcher
 import com.purush.imgursearch.ui.plugins.DebounceTextWatcher.DebounceCompletedListener

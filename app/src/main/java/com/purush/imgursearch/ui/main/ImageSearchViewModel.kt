@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.purush.imgursearch.data.repositories.ImageRepository
 import com.purush.imgursearch.data.repositories.ImageSearchResult
-import com.purush.imgursearch.data.schema.Image
+import com.purush.imgursearch.data.source.remote.schema.Image
 import com.purush.imgursearch.utils.Event
 import kotlinx.coroutines.*
 

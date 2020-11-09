@@ -2,8 +2,8 @@ package com.purush.imgursearch.data.repositories
 
 import android.util.Log
 import com.purush.imgursearch.data.ImgurApi
-import com.purush.imgursearch.data.models.ImageList
-import com.purush.imgursearch.data.schema.Image
+import com.purush.imgursearch.data.source.remote.models.ImageList
+import com.purush.imgursearch.data.source.remote.schema.Image
 import kotlinx.coroutines.CancellationException
 
 private const val TAG = "ImageRepository"

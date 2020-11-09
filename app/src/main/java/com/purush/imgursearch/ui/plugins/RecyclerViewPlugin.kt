@@ -3,7 +3,7 @@ package com.purush.imgursearch.ui.plugins
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.purush.imgursearch.R
-import com.purush.imgursearch.data.schema.Image
+import com.purush.imgursearch.data.source.remote.schema.Image
 
 class RecyclerViewPlugin(
     rootView: View,

@@ -1,4 +1,4 @@
-package com.purush.imgursearch.data.schema
+package com.purush.imgursearch.data.source.remote.schema
 
 import com.google.gson.annotations.SerializedName
 

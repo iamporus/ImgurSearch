@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.purush.imgursearch.R
-import com.purush.imgursearch.data.schema.Image
+import com.purush.imgursearch.data.source.remote.schema.Image
 
 class RecyclerViewAdapter(
     private val listener: RecyclerViewPlugin.ImageClickedListener

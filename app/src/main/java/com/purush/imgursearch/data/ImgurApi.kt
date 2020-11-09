@@ -1,6 +1,6 @@
 package com.purush.imgursearch.data
 
-import com.purush.imgursearch.data.schema.ImgurResponseSchema
+import com.purush.imgursearch.data.source.remote.schema.ImgurResponseSchema
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
