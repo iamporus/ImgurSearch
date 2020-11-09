@@ -4,6 +4,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:contentDescription="@string/empty_string"
     android:scaleType="centerCrop"
-    android:src="@color/black"
+    android:src="@android:color/black"
     android:layout_width="@dimen/generic_grid_image_size"
     android:layout_height="@dimen/generic_grid_image_size" />
