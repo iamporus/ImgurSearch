@@ -1,10 +1,13 @@
 package com.purush.imgursearch
 
+import android.content.Context
 import com.purush.imgursearch.data.ImgurApi
 import com.purush.imgursearch.data.repositories.CommentRepository
 import com.purush.imgursearch.data.repositories.DefaultCommentRepository
 import com.purush.imgursearch.data.repositories.DefaultImageRepository
 import com.purush.imgursearch.data.repositories.ImageRepository
+import com.purush.imgursearch.data.source.local.ImgurDao
+import com.purush.imgursearch.data.source.local.ImgurDatabase
 import com.purush.imgursearch.utils.Constants
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -17,6 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ServiceLocator {
 
     var imageRepository: ImageRepository? = null
+
     var commentRepository: CommentRepository? = null
 
     private val retrofit: Retrofit = Retrofit.Builder()
@@ -34,13 +38,18 @@ object ServiceLocator {
         }
     }
 
-    fun provideCommentRepository(): CommentRepository {
+    fun provideCommentRepository(context: Context): CommentRepository {
 
-        synchronized(this) {
-
-            return commentRepository ?: commentRepository
-            ?: DefaultCommentRepository(getImgurApiService())
+        // no need for synchronization here as DefaultCommentRepository.getInstance has a locking mechanism
+        return commentRepository ?: commentRepository ?: DefaultCommentRepository.getInstance(
+            getImageDao(context)
+        ).also {
+            commentRepository = it
         }
+    }
+
+    private fun getImageDao(context: Context): ImgurDao {
+        return ImgurDatabase.getInstance(context).imgurDao()
     }
 
     private fun getImgurApiService(): ImgurApi {

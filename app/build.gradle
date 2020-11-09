@@ -66,6 +66,9 @@ dependencies {
     //kotlin extensions and coroutines support for Room
     implementation 'androidx.room:room-ktx:2.2.5'
 
+    //java ktx interoperability
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.0.1'
+
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

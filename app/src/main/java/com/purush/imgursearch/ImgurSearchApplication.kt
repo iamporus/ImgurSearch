@@ -12,9 +12,6 @@ class ImgurSearchApplication : Application() {
         get() = ServiceLocator.provideImageRepository()
 
     val commentRepository: CommentRepository
-        get() = ServiceLocator.provideCommentRepository()
+        get() = ServiceLocator.provideCommentRepository(applicationContext)
 
-    override fun onCreate() {
-        super.onCreate()
-    }
 }

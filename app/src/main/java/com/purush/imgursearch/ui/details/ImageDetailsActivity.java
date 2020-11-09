@@ -20,7 +20,7 @@ import com.purush.imgursearch.ImgurSearchApplication;
 import com.purush.imgursearch.R;
 import com.purush.imgursearch.data.repositories.CommentRepository;
 import com.purush.imgursearch.data.repositories.ImageRepository;
-import com.purush.imgursearch.data.schema.Image;
+import com.purush.imgursearch.data.source.remote.schema.Image;
 import com.purush.imgursearch.ui.main.ViewModelFactory;
 
 public class ImageDetailsActivity extends AppCompatActivity {
@@ -58,6 +58,12 @@ public class ImageDetailsActivity extends AppCompatActivity {
                 showSelectedImage(image.getLink());
             }
         });
+
+        viewModel.getImageWithComment().observe(this, imageWithComments -> {
+            Log.e(TAG, "getImageWithComment(): " + imageWithComments);
+        });
+
+        //TODO: functionality to add comments
 
         if (getIntent() != null) {
             setupSelectedImage();

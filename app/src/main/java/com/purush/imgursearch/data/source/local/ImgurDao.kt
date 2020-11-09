@@ -8,6 +8,9 @@ import com.purush.imgursearch.data.source.local.entities.CommentEntity
 import com.purush.imgursearch.data.source.local.entities.ImageEntity
 import com.purush.imgursearch.data.source.local.entities.ImageWithComments
 
+/**
+ * Dao for abstract access to ImgurDatabase
+ */
 @Dao
 abstract class ImgurDao {
 
@@ -21,6 +24,9 @@ abstract class ImgurDao {
     @Insert
     abstract suspend fun insertComment(comment: CommentEntity)
 
+    /**
+     * work around for inserting into relations in Room
+     */
     suspend fun insertCommentToImage(
         image: ImageEntity,
         comment: CommentEntity

@@ -8,8 +8,9 @@ import com.purush.imgursearch.ui.details.ImageDetailsViewModel
 
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory(
+
     private val imagesRepository: ImageRepository,
-    @Suppress("unused") private val commentRepository: CommentRepository
+    private val commentRepository: CommentRepository
 ) :
     ViewModelProvider.NewInstanceFactory() {
 
