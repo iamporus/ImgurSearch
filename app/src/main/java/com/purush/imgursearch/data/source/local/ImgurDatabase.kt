@@ -7,6 +7,8 @@ import androidx.room.RoomDatabase
 import com.purush.imgursearch.data.source.local.DatabaseConstants.DATABASE_NAME
 import com.purush.imgursearch.data.source.local.entities.CommentEntity
 import com.purush.imgursearch.data.source.local.entities.ImageEntity
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 @Database(
     entities =
@@ -25,6 +27,8 @@ abstract class ImgurDatabase : RoomDatabase() {
 
         @Volatile
         private var instance: ImgurDatabase? = null
+        private const val NUMBER_OF_THREADS = 4
+        val databaseWriteExecutor: ExecutorService = Executors.newFixedThreadPool(NUMBER_OF_THREADS)
 
         fun getInstance(context: Context): ImgurDatabase {
             return instance ?: instance ?: synchronized(this) {

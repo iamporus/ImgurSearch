@@ -8,10 +8,9 @@
 
     <ImageView
         android:id="@+id/selectedImageView"
-        android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_width="260dp"
+        android:layout_height="match_parent"
         android:contentDescription="@string/empty_string"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,16 +20,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:inputType="text"
-        app:layout_constraintEnd_toStartOf="@+id/addCommentButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectedImageView" />
+        app:layout_constraintEnd_toEndOf="@+id/addCommentButton"
+        app:layout_constraintStart_toEndOf="@+id/selectedImageView"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/selectedImageView"
         app:layout_constraintTop_toBottomOf="@+id/commentEditText">
 
         <LinearLayout
@@ -53,5 +52,5 @@
         android:layout_height="wrap_content"
         android:text="@string/post"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectedImageView" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

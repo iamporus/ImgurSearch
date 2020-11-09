@@ -1,35 +1,17 @@
 package com.purush.imgursearch.data.repositories
 
+import androidx.lifecycle.LiveData
 import com.purush.imgursearch.data.source.local.ImgurDao
+import com.purush.imgursearch.data.source.local.ImgurDatabase
 import com.purush.imgursearch.data.source.local.entities.CommentEntity
 import com.purush.imgursearch.data.source.local.entities.ImageEntity
 import com.purush.imgursearch.data.source.local.entities.ImageWithComments
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.future.future
-import java.util.concurrent.CompletableFuture
 
 interface CommentRepository {
 
-    suspend fun getCommentsForImage(imageId: String): ImageWithComments
+    fun getCommentsForImage(imageId: String): LiveData<ImageWithComments>
 
-    suspend fun insertImage(image: ImageEntity)
-
-    suspend fun insertCommentToImage(image: ImageEntity, comment: CommentEntity)
-
-    // converting suspend fun into Completable Future to be consumed from java
-    fun getCommentsForImageAsync(imageId: String): CompletableFuture<ImageWithComments> {
-        return GlobalScope.future {
-            getCommentsForImage(imageId)
-        }
-    }
-
-    // converting suspend fun into Completable Future to be consumed from java
-    fun insertCommentToImageAsync(image: ImageEntity, comment: CommentEntity) {
-        GlobalScope.future {
-            insertImage(image)
-            insertCommentToImage(image, comment)
-        }
-    }
+    fun insertCommentToImage(image: ImageEntity, comment: CommentEntity)
 }
 
 /**
@@ -40,16 +22,19 @@ class DefaultCommentRepository(
     private val imgurDao: ImgurDao
 ) : CommentRepository {
 
-    override suspend fun getCommentsForImage(imageId: String): ImageWithComments {
+    override fun getCommentsForImage(imageId: String): LiveData<ImageWithComments> {
         return imgurDao.getImageWithComments(imageId)
     }
 
-    override suspend fun insertImage(image: ImageEntity) {
-        imgurDao.insertImage(image)
+    override fun insertCommentToImage(image: ImageEntity, comment: CommentEntity) {
+        ImgurDatabase.databaseWriteExecutor.execute {
+            insertImage(image)
+            imgurDao.insertCommentToImage(image, comment)
+        }
     }
 
-    override suspend fun insertCommentToImage(image: ImageEntity, comment: CommentEntity) {
-        imgurDao.insertCommentToImage(image, comment)
+    private fun insertImage(image: ImageEntity) {
+        imgurDao.insertImage(image)
     }
 
     /**

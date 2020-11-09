@@ -1,9 +1,7 @@
 package com.purush.imgursearch.data.source.local
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.lifecycle.LiveData
+import androidx.room.*
 import com.purush.imgursearch.data.source.local.entities.CommentEntity
 import com.purush.imgursearch.data.source.local.entities.ImageEntity
 import com.purush.imgursearch.data.source.local.entities.ImageWithComments
@@ -16,18 +14,18 @@ abstract class ImgurDao {
 
     @Transaction
     @Query("SELECT * from image WHERE image_id = :imageId")
-    abstract suspend fun getImageWithComments(imageId: String): ImageWithComments
+    abstract fun getImageWithComments(imageId: String): LiveData<ImageWithComments>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract fun insertImage(image: ImageEntity)
 
     @Insert
-    abstract suspend fun insertImage(image: ImageEntity)
-
-    @Insert
-    abstract suspend fun insertComment(comment: CommentEntity)
+    abstract fun insertComment(comment: CommentEntity): Long
 
     /**
      * work around for inserting into relations in Room
      */
-    suspend fun insertCommentToImage(
+     fun insertCommentToImage(
         image: ImageEntity,
         comment: CommentEntity
     ) {
