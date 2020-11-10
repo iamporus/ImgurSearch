@@ -28,12 +28,18 @@ import com.purush.imgursearch.data.source.local.entities.CommentEntity;
 import com.purush.imgursearch.data.source.remote.schema.Image;
 import com.purush.imgursearch.ui.main.ViewModelFactory;
 
+import javax.inject.Inject;
+
 public class ImageDetailsActivity extends AppCompatActivity {
 
     public static String TAG = "ImageDetailsActivity";
     public static String EXTRA_SELECTED_IMAGE = "com.purush.imgursearch.ui.details.extra.selected_image";
-    private ImageDetailsViewModel viewModel;
     private Image selectedImage;
+
+    @Inject
+    ViewModelFactory viewModelFactory;
+
+    private ImageDetailsViewModel viewModel;
 
     public static void navigate(Activity activity, Image selectedImage) {
         Bundle args = new Bundle();
@@ -46,17 +52,13 @@ public class ImageDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        ((ImgurSearchApplication)getApplication()).getAppComponent().inject(this);
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_image_details);
 
-        //TODO: inject these via Dagger
-
-        ImageRepository imageRepository =
-                ((ImgurSearchApplication) getApplication()).getImageRepository();
-        CommentRepository commentRepository =
-                ((ImgurSearchApplication) getApplication()).getCommentRepository();
-
-        ViewModelFactory viewModelFactory = new ViewModelFactory(imageRepository, commentRepository);
         viewModel = new ViewModelProvider(this, viewModelFactory).get(ImageDetailsViewModel.class);
 
         if (getIntent() != null) {

@@ -1,6 +1,7 @@
 package com.purush.imgursearch.di
 
 import android.content.Context
+import com.purush.imgursearch.ui.details.ImageDetailsActivity
 import com.purush.imgursearch.ui.main.ImageSearchFragment
 import dagger.BindsInstance
 import dagger.Component
@@ -23,4 +24,6 @@ interface AppComponent {
     }
 
     fun inject(imageSearchFragment: ImageSearchFragment)
+
+    fun inject(imageDetailsActivity: ImageDetailsActivity)
 }

@@ -10,12 +10,15 @@ import com.purush.imgursearch.data.source.local.entities.ImageEntity;
 import com.purush.imgursearch.data.source.local.entities.ImageWithComments;
 import com.purush.imgursearch.data.source.remote.schema.Image;
 
+import javax.inject.Inject;
+
 
 public class ImageDetailsViewModel extends ViewModel {
 
     private final MutableLiveData<Image> selectedImageLiveData;
     private final CommentRepository commentRepository;
 
+    @Inject
     public ImageDetailsViewModel(CommentRepository commentRepository) {
         this.commentRepository = commentRepository;
         selectedImageLiveData = new MutableLiveData<>();

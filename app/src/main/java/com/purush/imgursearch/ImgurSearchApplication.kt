@@ -2,8 +2,6 @@ package com.purush.imgursearch
 
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
-import com.purush.imgursearch.data.repositories.CommentRepository
-import com.purush.imgursearch.data.repositories.ImageRepository
 import com.purush.imgursearch.di.AppComponent
 import com.purush.imgursearch.di.DaggerAppComponent
 
@@ -15,12 +13,6 @@ class ImgurSearchApplication : Application() {
         // We pass the applicationContext that will be used as Context in the graph
         DaggerAppComponent.factory().create(applicationContext)
     }
-
-    val imageRepository: ImageRepository
-        get() = ServiceLocator.provideImageRepository()
-
-    val commentRepository: CommentRepository
-        get() = ServiceLocator.provideCommentRepository(applicationContext)
 
     override fun onCreate() {
         super.onCreate()
