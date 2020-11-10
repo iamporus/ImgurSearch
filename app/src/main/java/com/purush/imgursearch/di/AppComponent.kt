@@ -5,7 +5,9 @@ import com.purush.imgursearch.ui.details.ImageDetailsActivity
 import com.purush.imgursearch.ui.main.ImageSearchFragment
 import dagger.BindsInstance
 import dagger.Component
+import javax.inject.Singleton
 
+@Singleton
 @Component(
     modules = [
         ImageRepositoryModule::class,

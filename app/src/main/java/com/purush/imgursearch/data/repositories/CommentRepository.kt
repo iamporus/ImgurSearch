@@ -7,6 +7,7 @@ import com.purush.imgursearch.data.source.local.entities.CommentEntity
 import com.purush.imgursearch.data.source.local.entities.ImageEntity
 import com.purush.imgursearch.data.source.local.entities.ImageWithComments
 import javax.inject.Inject
+import javax.inject.Singleton
 
 interface CommentRepository {
 
@@ -19,6 +20,7 @@ interface CommentRepository {
  * Default/concrete implementation of CommentRepository.
  * Should be replaced by mocks while testing
  */
+@Singleton
 class DefaultCommentRepository @Inject constructor(
     private val imgurDao: ImgurDao
 ) : CommentRepository {
@@ -36,26 +38,6 @@ class DefaultCommentRepository @Inject constructor(
 
     private fun insertImage(image: ImageEntity) {
         imgurDao.insertImage(image)
-    }
-
-    /**
-     * enables thread-safe singleton access
-     */
-    companion object {
-
-        @Volatile
-        private var instance: CommentRepository? = null
-
-        fun getInstance(imageDao: ImgurDao): CommentRepository {
-            return instance ?: instance ?: buildRepository(imageDao).also {
-                instance = it
-            }
-        }
-
-        private fun buildRepository(imageDao: ImgurDao): CommentRepository {
-            return instance ?: instance ?: DefaultCommentRepository(imageDao)
-        }
-
     }
 
 }

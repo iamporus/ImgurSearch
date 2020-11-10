@@ -10,15 +10,18 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module
 class RetrofitModule {
 
+    @Singleton
     @Provides
     fun getImgurApiService(retrofit: Retrofit): ImgurApi {
         return retrofit.create(ImgurApi::class.java)
     }
 
+    @Singleton
     @Provides
     fun getRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
@@ -28,6 +31,7 @@ class RetrofitModule {
             .build()
     }
 
+    @Singleton
     @Provides
     fun getOkHttpClient(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
