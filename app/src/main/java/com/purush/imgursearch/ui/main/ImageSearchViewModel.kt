@@ -9,12 +9,12 @@ import com.purush.imgursearch.data.repositories.ImageSearchResult
 import com.purush.imgursearch.data.source.remote.schema.Image
 import com.purush.imgursearch.utils.Event
 import kotlinx.coroutines.*
-
-@Suppress("unused")
+import javax.inject.Inject
 
 private const val TAG = "SearchImagesViewModel"
 
-class ImageSearchViewModel(
+
+class ImageSearchViewModel @Inject constructor(
     private val imageRepository: ImageRepository
 ) : ViewModel() {
 

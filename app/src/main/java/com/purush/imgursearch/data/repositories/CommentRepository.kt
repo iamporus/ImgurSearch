@@ -6,6 +6,7 @@ import com.purush.imgursearch.data.source.local.ImgurDatabase
 import com.purush.imgursearch.data.source.local.entities.CommentEntity
 import com.purush.imgursearch.data.source.local.entities.ImageEntity
 import com.purush.imgursearch.data.source.local.entities.ImageWithComments
+import javax.inject.Inject
 
 interface CommentRepository {
 
@@ -18,7 +19,7 @@ interface CommentRepository {
  * Default/concrete implementation of CommentRepository.
  * Should be replaced by mocks while testing
  */
-class DefaultCommentRepository(
+class DefaultCommentRepository @Inject constructor(
     private val imgurDao: ImgurDao
 ) : CommentRepository {
 

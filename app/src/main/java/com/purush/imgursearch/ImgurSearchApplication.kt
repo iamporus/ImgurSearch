@@ -4,10 +4,17 @@ import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import com.purush.imgursearch.data.repositories.CommentRepository
 import com.purush.imgursearch.data.repositories.ImageRepository
+import com.purush.imgursearch.di.AppComponent
+import com.purush.imgursearch.di.DaggerAppComponent
 
 class ImgurSearchApplication : Application() {
 
-    //TODO: Replace Service Locator with Dagger 2
+    // Instance of the AppComponent that will be used by all the Activities in the project
+    val appComponent: AppComponent by lazy {
+        // Creates an instance of AppComponent using its Factory constructor
+        // We pass the applicationContext that will be used as Context in the graph
+        DaggerAppComponent.factory().create(applicationContext)
+    }
 
     val imageRepository: ImageRepository
         get() = ServiceLocator.provideImageRepository()

@@ -1,5 +1,6 @@
 package com.purush.imgursearch.ui.main
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,16 +8,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.purush.imgursearch.ImgurSearchApplication
 import com.purush.imgursearch.R
 import com.purush.imgursearch.data.source.remote.schema.Image
 import com.purush.imgursearch.ui.details.ImageDetailsActivity
 import com.purush.imgursearch.ui.plugins.DebounceTextWatcher
 import com.purush.imgursearch.ui.plugins.DebounceTextWatcher.DebounceCompletedListener
 import com.purush.imgursearch.ui.plugins.RecyclerViewPlugin
-import com.purush.imgursearch.utils.getViewModelFactory
 import kotlinx.android.synthetic.main.image_search_fragment.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 @Suppress("unused")
@@ -26,13 +28,19 @@ class ImageSearchFragment : Fragment(), CoroutineScope, RecyclerViewPlugin.Image
 
     override val coroutineContext: CoroutineContext = Dispatchers.Main
 
-    // lazy initialization of view model through use of delegates and view model factory
-    private val viewModel: ImageSearchViewModel by viewModels {
-        getViewModelFactory()
-    }
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val viewModel: ImageSearchViewModel by viewModels { viewModelFactory }
 
     // composition is preferred over inheritance
     private lateinit var recyclerViewPlugin: RecyclerViewPlugin
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        (requireActivity().application as ImgurSearchApplication).appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

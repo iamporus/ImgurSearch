@@ -5,6 +5,7 @@ import com.purush.imgursearch.data.ImgurApi
 import com.purush.imgursearch.data.source.remote.models.ImageList
 import com.purush.imgursearch.data.source.remote.schema.Image
 import kotlinx.coroutines.CancellationException
+import javax.inject.Inject
 
 private const val TAG = "ImageRepository"
 
@@ -19,7 +20,7 @@ interface ImageRepository {
     suspend fun getImagesByQuery(searchQuery: String): ImageSearchResult
 }
 
-class DefaultImageRepository(
+class DefaultImageRepository @Inject constructor(
     private val imgurApi: ImgurApi,
 
     ) : ImageRepository {
