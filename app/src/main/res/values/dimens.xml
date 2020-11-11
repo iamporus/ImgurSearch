@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="generic_vertical_margin">8dp</dimen>
+    <dimen name="generic_horizontal_margin">8dp</dimen>
     <dimen name="generic_padding">8dp</dimen>
     <dimen name="generic_grid_item_padding">4dp</dimen>
     <dimen name="generic_grid_image_size">100dp</dimen>
+    <dimen name="generic_image_details_size">260dp</dimen>
     <dimen name="gridSpanCount">4</dimen>
+    <dimen name="commentTextSize">16sp</dimen>
 </resources>

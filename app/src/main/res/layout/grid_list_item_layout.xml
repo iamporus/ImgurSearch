@@ -3,6 +3,7 @@
     android:layout_margin="@dimen/generic_grid_item_padding"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:contentDescription="@string/empty_string"
+    android:layout_gravity="center"
     android:scaleType="centerCrop"
     android:src="@android:color/black"
     android:layout_width="@dimen/generic_grid_image_size"
