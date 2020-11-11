@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="generic_grid_image_size">80dp</dimen>
+    <dimen name="generic_image_details_size">260dp</dimen>
+</resources>

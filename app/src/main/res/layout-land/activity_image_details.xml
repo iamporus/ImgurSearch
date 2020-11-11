@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/generic_vertical_margin"
     tools:context=".ui.details.ImageDetailsActivity">
 
     <ImageView
         android:id="@+id/selectedImageView"
-        android:layout_width="260dp"
+        android:layout_width="@dimen/generic_image_details_size"
         android:layout_height="match_parent"
         android:contentDescription="@string/empty_string"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,9 +19,11 @@
         android:id="@+id/commentEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_margin="8dp"
         android:inputType="text"
-        app:layout_constraintEnd_toEndOf="@+id/addCommentButton"
+        android:maxLines="5"
+        android:hint="@string/post_a_comment"
+        app:layout_constraintEnd_toStartOf="@+id/addCommentButton"
         app:layout_constraintStart_toEndOf="@+id/selectedImageView"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,10 +42,7 @@
             android:layout_margin="@dimen/generic_padding"
             android:padding="@dimen/generic_padding">
 
-            <TextView
-                android:id="@+id/commentsTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <include layout="@layout/comment_box_layout"/>
         </LinearLayout>
     </ScrollView>
 

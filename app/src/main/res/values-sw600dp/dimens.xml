@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="generic_padding">16dp</dimen>
+    <dimen name="generic_grid_item_padding">4dp</dimen>
+    <dimen name="generic_grid_image_size">160dp</dimen>
+    <dimen name="generic_image_details_size">420dp</dimen>
+    <dimen name="gridSpanCount">6</dimen>
+</resources>

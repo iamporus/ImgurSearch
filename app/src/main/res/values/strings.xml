@@ -3,6 +3,8 @@
     <string name="empty_string" />
     <string name="load_error_status">Oops. :( \n Failed to load the images!</string>
     <string name="generic_toast_error_fetch_error">Error while fetching images. Try again later</string>
-    <string name="post">Post</string>
+    <string name="post">Submit</string>
     <string name="no_comments">No Comments. ;)</string>
+    <string name="search_here">Search here eg. cats</string>
+    <string name="post_a_comment">Post Comment</string>
 </resources>
