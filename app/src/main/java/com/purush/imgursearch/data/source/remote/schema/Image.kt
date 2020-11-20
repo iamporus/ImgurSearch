@@ -1,9 +1,11 @@
 package com.purush.imgursearch.data.source.remote.schema
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Image(
     val id: String,
     val link: String,
     var title: String,
-    ) : Serializable
+) : Parcelable

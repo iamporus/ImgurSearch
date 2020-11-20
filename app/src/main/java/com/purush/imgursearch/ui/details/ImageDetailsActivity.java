@@ -22,8 +22,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
 import com.purush.imgursearch.ImgurSearchApplication;
 import com.purush.imgursearch.R;
-import com.purush.imgursearch.data.repositories.CommentRepository;
-import com.purush.imgursearch.data.repositories.ImageRepository;
 import com.purush.imgursearch.data.source.local.entities.CommentEntity;
 import com.purush.imgursearch.data.source.remote.schema.Image;
 import com.purush.imgursearch.ui.main.ViewModelFactory;
@@ -43,7 +41,7 @@ public class ImageDetailsActivity extends AppCompatActivity {
 
     public static void navigate(Activity activity, Image selectedImage) {
         Bundle args = new Bundle();
-        args.putSerializable(EXTRA_SELECTED_IMAGE, selectedImage);
+        args.putParcelable(EXTRA_SELECTED_IMAGE, selectedImage);
 
         Intent intent = new Intent(activity, ImageDetailsActivity.class);
         intent.putExtras(args);
@@ -53,7 +51,7 @@ public class ImageDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        ((ImgurSearchApplication)getApplication()).getAppComponent().inject(this);
+        ((ImgurSearchApplication) getApplication()).getAppComponent().inject(this);
 
         super.onCreate(savedInstanceState);
 
@@ -64,7 +62,7 @@ public class ImageDetailsActivity extends AppCompatActivity {
         if (getIntent() != null) {
 
             Intent intent = getIntent();
-            selectedImage = (Image) intent.getSerializableExtra(EXTRA_SELECTED_IMAGE);
+            selectedImage = (Image) intent.getParcelableExtra(EXTRA_SELECTED_IMAGE);
 
             if (selectedImage != null) {
                 viewModel.setSelectedImage(selectedImage);
